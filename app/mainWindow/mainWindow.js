@@ -1,3 +1,5 @@
+const { ipcRenderer } = require('electron')
+const $ = require('jquery')
 
 // Clock functionality:
 
@@ -41,24 +43,29 @@ function checkTime(num) {
 // schedule functionality
 
 var scheduleElement = document.getElementById('schedule')
-
-var scheduleData = getSchedule()
-
-for (var i = 0; i < scheduleData.length; i ++) {
-    createItem(i)
-}
-
-
-
+var scheduleData
 
 function getSchedule() {
-    return ['数学', '英语', '语文', '物理']
-}
+    // ipcRenderer.send('getSchedule')
+    $.ajax({
+        url: 'http://192.168.101.41/app/api/getSchedule.php?token=yifanyang',
+        dataType: 'json',
+        success: function(data) {
+            scheduleData = data['data']
+            for (var i = 0; i < scheduleData.length; i++) {
+                createItem(i)
+            }
+        }
+    })
+};
+
+getSchedule()
+
 
 function createItem(index) {
     var item = document.createElement('li')
     var text = document.createTextNode(scheduleData[index][0])
-    // item.innerHTML = scheduleElement[index]
+        // item.innerHTML = scheduleElement[index]
     item.className = 'item'
     item.id = index
     item.appendChild(text)

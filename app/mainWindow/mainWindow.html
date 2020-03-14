@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'"> -->
+    <!-- <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'"> -->
+    <title>Schedule</title>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
+    <link rel="stylesheet" href="./mainWindow.css">
+</head>
+
+<body>
+    <div class="block clock">
+        <div class="container center">
+            <div class="date center" id="date"></div>
+            <div class="week center" id="week"></div>
+            <div class="time center" id="time"></div>
+        </div>
+    </div>
+
+    <div class="block main">
+        <ul id="schedule">
+        </ul>
+    </div>
+
+    <!-- You can also require other files to run in this process -->
+    <script src="./renderer.js"></script>
+    <script src="./mainWindow.js"></script>
+</body>
+
+</html>
