@@ -48,10 +48,10 @@ var scheduleData
 function getSchedule() {
     // ipcRenderer.send('getSchedule')
     $.ajax({
-        url: 'http://192.168.101.41/app/api/getSchedule.php?token=yifanyang',
+        url: 'http://192.168.101.41/app/api/getSchedule/test2.php?weekday=' + new Date().getDay(),
         dataType: 'json',
         success: function(data) {
-            scheduleData = data['data']
+            scheduleData = data['data']['schedule']
             for (var i = 0; i < scheduleData.length; i++) {
                 createItem(i)
             }
