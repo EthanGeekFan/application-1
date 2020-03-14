@@ -10,10 +10,10 @@ function createWindow () {
     x: width - 100,
     width: 100,
     minWidth: 100,
-    minHeight: 400,
+    minHeight: 200,
     height: height,
     show: false,
-    frame: false,
+    // frame: false,
     // resizable: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')

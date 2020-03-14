@@ -16,6 +16,7 @@
       display: flex;
       flex-direction: column;
       font-family: Arial, Helvetica, sans-serif;
+      cursor: default;
     }
 
     .block {
@@ -66,6 +67,8 @@
     }
 
     .item {
+      transition: 0.7s;
+
       display: block;
       margin: 0 auto;
       margin-top: 15px;
@@ -77,7 +80,14 @@
       background-color: rgb(0, 132, 255);
       color: white;
       box-shadow: 0px 3px 5px rgba(73, 73, 73, 0.541);
-      border-radius: 50px;
+      border-radius: 50%;
+      z-index: 2;
+    }
+
+    .item:hover {
+      transition: 0.7s;
+      transform: translateY(-4px);
+      box-shadow: 0px 10px 5px rgba(97, 97, 97, 0.445);
     }
 
     .date {
