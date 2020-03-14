@@ -48,7 +48,7 @@ var scheduleData
 function getSchedule() {
     // ipcRenderer.send('getSchedule')
     $.ajax({
-        url: 'http://192.168.101.41/app/api/getSchedule/test2.php?weekday=' + new Date().getDay(),
+        url: 'http://192.168.101.41/app/api/getSchedule/?weekday=' + new Date().getDay(),
         dataType: 'json',
         success: function(data) {
             scheduleData = data['data']['schedule']
