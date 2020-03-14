@@ -1,16 +1,15 @@
-const { ipcRenderer } = require('electron')
 const $ = require('jquery')
 
 // Clock functionality:
 
 const weekdays = {
-    1: '星期一',
-    2: '星期二',
-    3: '星期三',
-    4: '星期四',
-    5: '星期五',
-    6: '星期六',
-    7: '星期日',
+    1: '星期日',
+    2: '星期一',
+    3: '星期二',
+    4: '星期三',
+    5: '星期四',
+    6: '星期五',
+    7: '星期六'
 }
 
 function updateClock() {
@@ -20,7 +19,7 @@ function updateClock() {
     var now = new Date()
     var month = (now.getMonth() + 1) + '月'
     var date = now.getDate() + '日'
-    var week = now.getDay()
+    var week = now.getDay() + 1
     var hour = now.getHours()
     var minute = now.getMinutes()
     var second = now.getSeconds()
@@ -48,7 +47,7 @@ var scheduleData
 function getSchedule() {
     // ipcRenderer.send('getSchedule')
     $.ajax({
-        url: 'http://192.168.101.41/app/api/getSchedule/?weekday=' + new Date().getDay(),
+        url: 'https://www.room923.cf/app/api/getSchedule/?weekday=' + (new Date().getDay() + 1),
         dataType: 'json',
         success: function(data) {
             scheduleData = data['data']['schedule']
