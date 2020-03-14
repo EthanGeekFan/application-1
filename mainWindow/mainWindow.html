@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'"> -->
+  <!-- <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'"> -->
+  <title>Schedule</title>
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
+  <link rel="stylesheet" href="./mainWindow.css">
+  <style>
+    html,
+    body {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .block {
+      display: block;
+      margin: auto;
+      padding: auto;
+      /* background-color: aqua; */
+      border-radius: 10px;
+    }
+
+    .clock {
+      width: 100%;
+      display: block;
+      justify-content: space-between;
+      align-items: center;
+      height: 100px;
+      text-align: center;
+    }
+
+    .center {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .container {
+      position: relative;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .main {
+      margin-top: 10px;
+      width: 100%;
+      display: block;
+      justify-content: space-between;
+      align-items: center;
+      height: fit-content;
+      text-align: center;
+      flex-grow: 1;
+      overflow: scroll;
+    }
+
+    #schedule {
+      list-style-type: none;
+      padding: 0;
+      margin: 0 auto;
+    }
+
+    .item {
+      display: block;
+      margin: 0 auto;
+      margin-top: 15px;
+      width: 75px;
+      height: 75px;
+      line-height: 75px;
+      font-size: 3em;
+      text-align: center;
+      background-color: rgb(0, 132, 255);
+      color: white;
+      box-shadow: 0px 3px 5px rgba(73, 73, 73, 0.541);
+      border-radius: 50px;
+    }
+
+    .date {
+      font-family: sans-serif;
+      font-size: 1.3em;
+    }
+
+    .week {
+      font-size: 1.2em;
+    }
+    .time {
+      font-family: monospace;
+      font-size: 1.4em;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="block clock">
+    <div class="container center">
+      <div class="date center" id="date"></div>
+      <div class="week center" id="week"></div>
+      <div class="time center" id="time"></div>
+    </div>
+  </div>
+
+  <div class="block main">
+      <ul id="schedule">
+        <li class="item">草</li>
+        <li class="item">泥</li>
+        <li class="item">马</li>
+      </ul>
+  </div>
+
+  <!-- You can also require other files to run in this process -->
+  <script src="./renderer.js"></script>
+  <script src="./mainWindow.js"></script>
+</body>
+
+</html>
