@@ -1,3 +1,6 @@
+
+// Clock functionality:
+
 const weekdays = {
     1: '星期一',
     2: '星期二',
@@ -35,3 +38,29 @@ function checkTime(num) {
 }
 
 
+// schedule functionality
+
+var scheduleElement = document.getElementById('schedule')
+
+var scheduleData = getSchedule()
+
+for (var i = 0; i < scheduleData.length; i ++) {
+    createItem(i)
+}
+
+
+
+
+function getSchedule() {
+    return ['数学', '英语', '语文', '物理']
+}
+
+function createItem(index) {
+    var item = document.createElement('li')
+    var text = document.createTextNode(scheduleData[index][0])
+    // item.innerHTML = scheduleElement[index]
+    item.className = 'item'
+    item.id = index
+    item.appendChild(text)
+    scheduleElement.appendChild(item)
+}

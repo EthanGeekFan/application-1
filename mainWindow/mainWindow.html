@@ -98,9 +98,23 @@
     .week {
       font-size: 1.2em;
     }
+
     .time {
       font-family: monospace;
       font-size: 1.4em;
+    }
+
+    .sub_menu {
+      list-style: none;
+      width: 75px;
+      height: 100px;
+      background-color: yellow;
+      z-index: 1;
+    }
+    
+    .sub_menu li {
+      float: right;
+      font-size: 0.5em;
     }
   </style>
 </head>
@@ -115,11 +129,8 @@
   </div>
 
   <div class="block main">
-      <ul id="schedule">
-        <li class="item">草</li>
-        <li class="item">泥</li>
-        <li class="item">马</li>
-      </ul>
+    <ul id="schedule">
+    </ul>
   </div>
 
   <!-- You can also require other files to run in this process -->
