@@ -49,3 +49,8 @@ var checkbox = document.getElementById('servivalMode')
 checkbox.addEventListener('change', (e) => {
     console.log(e.target.checked)
 })
+
+const fs = require('fs')
+
+// root path is: new/
+console.log(JSON.parse(fs.readFileSync('./package.json')))
