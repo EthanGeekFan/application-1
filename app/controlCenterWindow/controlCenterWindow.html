@@ -11,13 +11,14 @@
             margin: 0;
             width: 100%;
             height: 100%;
+            background-color: white;
         }
         
         #titleBar {
             -webkit-app-region: drag;
             width: 100%;
             height: 23px;
-            background-color: royalblue;
+            background-color: white;
             text-align: center;
             line-height: 23px;
             font-family: Arial, Helvetica, sans-serif;
@@ -27,8 +28,10 @@
         #navigationBar {
             /* background-color: yellowgreen; */
             float: left;
+            /* padding-top: 23px; */
             height: calc(100% - 23px);
             width: 50px;
+            /* background-color: rgba(10, 10, 10, 0.1); */
             overflow: hidden;
         }
         
@@ -50,10 +53,54 @@
             display: block;
             height: 50px;
             line-height: 50px;
-            /* border-radius: 5px; */
-            background-color: salmon;
-            /* background-image: url(''); */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
+        
+        .naviItem img {
+            pointer-events: none;
+            width: 60%;
+            height: 60%;
+            display: inline-block;
+            z-index: 2;
+        }
+        
+        .indicater {
+            pointer-events: none;
+            transition: 0.7s;
+            position: absolute;
+            left: 0;
+            height: inherit;
+            width: 5px;
+            background: royalblue;
+            z-index: 1;
+        }
+        
+        .inactive {
+            pointer-events: none;
+            transition: 0.7s;
+            position: absolute;
+            left: 0;
+            height: inherit;
+            width: 0px;
+            background: royalblue;
+            z-index: 1;
+        }
+        
+        .active {
+            pointer-events: none;
+            transition: 0.7s;
+            position: absolute;
+            left: 0;
+            height: inherit;
+            width: 50px;
+            background: royalblue;
+            z-index: 1;
+        }
+        /* .naviItem:hover {
+            background-color: rgba(10, 10, 10, 0.1);
+        } */
     </style>
 </head>
 
@@ -61,7 +108,10 @@
     <div id="titleBar"></div>
     <div id="navigationBar">
         <ul id="naviList">
-            <li class="naviItem"></li>
+            <li class="naviItem">
+                <div class="inactive"></div><img src="../assets/icons/components/settings.svg" alt="Settings"></li>
+            <li class="naviItem">
+                <div class="inactive"></div><img src="../assets/icons/components/wrench-100.png" alt="Settings"></li>
         </ul>
     </div>
     <div id="mainPanel"></div>
