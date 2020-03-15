@@ -31,18 +31,79 @@ function createWindow() {
         mainWindow.show()
     })
 
-    // const mainMenu = Menu.buildFromTemplate(mainMenuTemplate)
-    // Menu.setApplicationMenu(mainMenu)
+    if (process.platform != 'win32') {
+        const mainMenu = Menu.buildFromTemplate(mainMenuTemplate)
+        Menu.setApplicationMenu(mainMenu)
+    }
+
+    mainWindow.on('closed', function() {
+        app.quit()
+    })
+
 }
 
 const mainMenuTemplate = [{
-    label: 'File',
+    label: 'Schedule',
     submenu: [{
-        label: 'fuck',
+        role: 'about',
+    }, {
+        label: 'Check for Updates...',
+    }, {
+        type: 'separator'
+    }, {
+        label: 'Preferences',
+        accelerator: process.platform == 'darwin' ? 'Cmd+,' : 'Ctrl+,'
+    }, {
+        type: 'separator'
+    }, {
+        role: 'services'
+    }, {
+        type: 'separator'
+    }, {
+        role: 'hide'
+    }, {
+        role: 'hideOthers'
+    }, {
+        type: 'separator'
+    }, {
+        role: 'quit'
+    }]
+}, {
+    label: 'Tools',
+    submenu: [{
+        label: 'New Notification',
+        accelerator: process.platform == 'darwin' ? 'Cmd+N' : 'Ctrl+N',
+        click: (menuItem, browserWindow, event) => {
+            newNotification()
+        }
     }]
 }]
 
-process.platform === 'darwin' ? mainMenuTemplate.unshift({ label: '' }) : {}
+
+function newNotification() {
+    const newNotificationWindow = new BrowserWindow({
+        width: 500,
+        height: 300,
+        // resizable: false,
+        // frame: false,
+        show: false,
+    })
+
+    newNotificationWindow.loadFile('./app/newNotificationWindow/newNotificationWindow.html')
+
+    newNotificationWindow.on('ready-to-show', function() {
+        newNotificationWindow.show()
+    })
+}
+
+
+// process.platform === 'darwin' ? mainMenuTemplate.unshift({ label: '' }) : {}
+process.env.NODE_ENV === 'production' ? {} : mainMenuTemplate.push({
+    label: 'Developer',
+    submenu: [{
+        role: 'toggleDevTools'
+    }]
+})
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
