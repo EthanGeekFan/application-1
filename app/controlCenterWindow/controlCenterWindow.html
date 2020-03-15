@@ -39,7 +39,7 @@
             width: calc(100% - 50px);
             height: calc(100% - 23px);
             float: left;
-            background-color: gray;
+            overflow: hidden;
         }
         
         #naviList {
@@ -133,6 +133,46 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            box-shadow: 2px 2px 15px rgba(10, 10, 10, 0.247);
+        }
+        
+        #userInfo {
+            padding: 0px 25px;
+            font-family: sans-serif;
+            font-size: 1.2em;
+            font-weight: lighter;
+        }
+        
+        input {
+            transition: 0.6s;
+            outline: none;
+            width: 300px;
+            font-size: 1em;
+            padding-top: 7px;
+            padding-bottom: 7px;
+            padding-left: 15px;
+            padding-right: 15px;
+            border-radius: 50px;
+            border-width: 0;
+            box-shadow: 0px 0px 5px rgba(73, 73, 73, 0.541);
+            color: rgb(41, 41, 41);
+        }
+        
+        input:hover {
+            transition: 0.6s;
+            box-shadow: 0 6px 16px 0px rgba(0, 0, 0, 0.24);
+        }
+        
+        hr {
+            margin: 3px 15px;
+            border-width: 0.5px;
+            border-color: rgba(82, 82, 82, 0.212);
+        }
+        
+        #content {
+            width: 100%;
+            height: calc(100% - 100px - 7px);
+            overflow: scroll;
         }
     </style>
 </head>
@@ -154,6 +194,20 @@
                     <img src="../assets/icons/components/user-avatar-100.png">
                 </div>
             </div>
+            <div id="searchBar">
+                <form>
+                    <div class="field">
+                        <input type="text" name="search" id="search" placeholder="Search">
+                    </div>
+                </form>
+            </div>
+            <div id="userInfo">
+                Username
+            </div>
+        </div>
+        <hr>
+        <div id="content">
+
         </div>
     </div>
 
