@@ -1,26 +1,24 @@
 {
-  "name": "application-1",
-  "version": "1.0.0",
-  "description": "A minimal Electron application",
-  "main": "main.js",
-  "scripts": {
-    "start": "electron ."
-  },
-  "repository": "https://github.com/EthanGeekFan/application-1",
-  "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
-  ],
-  "author": "Yifan Yang",
-  "license": "CC0-1.0",
-  "devDependencies": {
-    "electron": "^8.1.1"
-  },
-  "dependencies": {
-    "jquery": "^3.4.1",
-    "material-components-web": "^5.1.0"
-  }
+    "name": "Schedule",
+    "version": "1.0.0",
+    "description": "A schedule application for classes and schools",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron ."
+    },
+    "repository": "https://github.com/EthanGeekFan/application-1",
+    "keywords": [
+        "Electron",
+        "Schedule",
+        "Class",
+        "School"
+    ],
+    "author": "Yifan Yang",
+    "license": "CC0-1.0",
+    "devDependencies": {
+        "electron": "^8.1.1"
+    },
+    "dependencies": {
+        "jquery": "^3.4.1",
+    }
 }

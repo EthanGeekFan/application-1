@@ -1,4 +1,6 @@
 const $ = require('jquery')
+const { ipcRenderer } = require('electron')
+const fs = require('fs')
 
 // Clock functionality:
 
@@ -70,3 +72,13 @@ function createItem(index) {
     item.appendChild(text)
     scheduleElement.appendChild(item)
 }
+
+
+// notification functionality
+
+ipcRenderer.on('notification:new', (e, time) => {
+    console.log(time)
+    let notification = new Notification('Notification Added Successfully', {
+        body: 'You will be notified on ' + time + '. '
+    })
+})

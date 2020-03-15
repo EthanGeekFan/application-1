@@ -1,11 +1,14 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, Menu, screen } = require('electron')
+const { app, BrowserWindow, Menu, screen, ipcMain } = require('electron')
 const path = require('path')
+
+var mainWindow
+var newNotificationWindow
 
 function createWindow() {
     const { width, height } = screen.getPrimaryDisplay().workAreaSize
         // Create the browser window.
-    const mainWindow = new BrowserWindow({
+    mainWindow = new BrowserWindow({
         y: 0,
         x: width - 110,
         width: 110,
@@ -41,6 +44,13 @@ function createWindow() {
     })
 
 }
+
+// notification functionality
+
+ipcMain.on('notification:new', (e, time) => {
+    mainWindow.webContents.send('notification:new', time)
+    newNotificationWindow.close()
+})
 
 const mainMenuTemplate = [{
     label: 'Schedule',
@@ -81,18 +91,25 @@ const mainMenuTemplate = [{
 
 
 function newNotification() {
-    const newNotificationWindow = new BrowserWindow({
+    newNotificationWindow = new BrowserWindow({
         width: 500,
         height: 300,
         // resizable: false,
         // frame: false,
         show: false,
+        webPreferences: {
+            nodeIntegration: true
+        }
     })
 
     newNotificationWindow.loadFile('./app/newNotificationWindow/newNotificationWindow.html')
 
     newNotificationWindow.on('ready-to-show', function() {
         newNotificationWindow.show()
+    })
+
+    newNotificationWindow.on('close', () => {
+        newNotificationWindow = null
     })
 }
 
