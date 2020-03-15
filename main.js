@@ -107,51 +107,59 @@ const mainMenuTemplate = [{
 
 
 function newNotification() {
-    newNotificationWindow = new BrowserWindow({
-        width: 500,
-        height: 300,
-        resizable: false,
-        // frame: false,
-        show: false,
-        webPreferences: {
-            nodeIntegration: true
-        }
-    })
-
-    newNotificationWindow.loadFile('./app/newNotificationWindow/newNotificationWindow.html')
-
-    newNotificationWindow.on('ready-to-show', function() {
+    if (newNotificationWindow !== null) {
         newNotificationWindow.show()
-    })
+    } else {
+        newNotificationWindow = new BrowserWindow({
+            width: 500,
+            height: 300,
+            resizable: false,
+            // frame: false,
+            show: false,
+            webPreferences: {
+                nodeIntegration: true
+            }
+        })
 
-    newNotificationWindow.on('close', () => {
-        newNotificationWindow = null
-    })
+        newNotificationWindow.loadFile('./app/newNotificationWindow/newNotificationWindow.html')
+
+        newNotificationWindow.on('ready-to-show', function() {
+            newNotificationWindow.show()
+        })
+
+        newNotificationWindow.on('close', () => {
+            newNotificationWindow = null
+        })
+    }
 }
 
 
 function controlCenter() {
-    controlCenterWindow = new BrowserWindow({
-        width: 1000,
-        height: 675,
-        resizable: true,
-        // frame: false,
-        titleBarStyle: "hidden",
-        show: false,
-        webPreferences: {
-            nodeIntegration: true
-        }
-    })
-
-    controlCenterWindow.loadFile('./app/controlCenterWindow/controlCenterWindow.html')
-
-    controlCenterWindow.on('ready-to-show', () => {
+    if (controlCenterWindow !== null) {
         controlCenterWindow.show()
-    })
+    } else {
+        controlCenterWindow = new BrowserWindow({
+            width: 1000,
+            height: 675,
+            resizable: true,
+            // frame: false,
+            titleBarStyle: "hidden",
+            show: false,
+            webPreferences: {
+                nodeIntegration: true
+            }
+        })
 
-    controlCenterWindow.on('close', () => {
-        controlCenterWindow = null
-    })
+        controlCenterWindow.loadFile('./app/controlCenterWindow/controlCenterWindow.html')
+
+        controlCenterWindow.on('ready-to-show', () => {
+            controlCenterWindow.show()
+        })
+
+        controlCenterWindow.on('close', () => {
+            controlCenterWindow = null
+        })
+    }
 }
 
 

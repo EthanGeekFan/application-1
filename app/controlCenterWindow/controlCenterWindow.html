@@ -39,7 +39,7 @@
             width: calc(100% - 50px);
             height: calc(100% - 23px);
             float: left;
-            /* background-color: gray; */
+            background-color: gray;
         }
         
         #naviList {
@@ -98,9 +98,42 @@
             background: royalblue;
             z-index: 1;
         }
-        /* .naviItem:hover {
-            background-color: rgba(10, 10, 10, 0.1);
-        } */
+        
+        #header {
+            width: 100%;
+            height: 100px;
+            background-color: white;
+            display: flex;
+            line-height: 100px;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        #avatar {
+            width: 100px;
+            padding: 0px 25px;
+            height: inherit;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #avatarContainer img {
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        #avatarContainer {
+            width: 75%;
+            height: 75%;
+            border-radius: 50%;
+            /* background-color: black; */
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
 </head>
 
@@ -109,12 +142,20 @@
     <div id="navigationBar">
         <ul id="naviList">
             <li class="naviItem">
-                <div class="inactive"></div><img src="../assets/icons/components/settings.svg" alt="Settings"></li>
+                <div class="inactive"></div><img src="../assets/icons/components/settings.svg"></li>
             <li class="naviItem">
-                <div class="inactive"></div><img src="../assets/icons/components/wrench-100.png" alt="Settings"></li>
+                <div class="inactive"></div><img src="../assets/icons/components/wrench-100.png"></li>
         </ul>
     </div>
-    <div id="mainPanel"></div>
+    <div id="mainPanel">
+        <div id="header">
+            <div id="avatar">
+                <div id="avatarContainer">
+                    <img src="../assets/icons/components/user-avatar-100.png">
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <script src="./controlCenterWindow.js"></script>
