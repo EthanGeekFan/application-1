@@ -44,3 +44,8 @@ function indexOf(collection, obj) {
     }
     return -1
 }
+
+var checkbox = document.getElementById('servivalMode')
+checkbox.addEventListener('change', (e) => {
+    console.log(e.target.checked)
+})
