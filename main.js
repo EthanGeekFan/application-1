@@ -2,8 +2,9 @@
 const { app, BrowserWindow, Menu, screen, ipcMain } = require('electron')
 const path = require('path')
 
-var mainWindow
-var newNotificationWindow
+var mainWindow = null
+var newNotificationWindow = null
+var controlCenterWindow = null
 
 function createWindow() {
     const { width, height } = screen.getPrimaryDisplay().workAreaSize
@@ -17,6 +18,7 @@ function createWindow() {
         height: height,
         show: false,
         frame: false,
+        // transparent: true,
         // resizable: false,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
@@ -74,6 +76,12 @@ const mainMenuTemplate = [{
     }, {
         role: 'hideOthers'
     }, {
+        label: 'Close Current Window',
+        accelerator: process.platform == 'darwin' ? 'Cmd+W' : 'Ctrl+W',
+        click: (menuItem, browserWindow, event) => {
+            browserWindow.close()
+        }
+    }, {
         type: 'separator'
     }, {
         role: 'quit'
@@ -86,6 +94,14 @@ const mainMenuTemplate = [{
         click: (menuItem, browserWindow, event) => {
             newNotification()
         }
+    }, {
+        type: 'separator'
+    }, {
+        label: 'Control Center',
+        accelerator: process.platform == 'darwin' ? 'Cmd+M' : 'Ctrl+M',
+        click: (menuItem, browserWindow, event) => {
+            controlCenter()
+        }
     }]
 }]
 
@@ -94,7 +110,7 @@ function newNotification() {
     newNotificationWindow = new BrowserWindow({
         width: 500,
         height: 300,
-        // resizable: false,
+        resizable: false,
         // frame: false,
         show: false,
         webPreferences: {
@@ -110,6 +126,31 @@ function newNotification() {
 
     newNotificationWindow.on('close', () => {
         newNotificationWindow = null
+    })
+}
+
+
+function controlCenter() {
+    controlCenterWindow = new BrowserWindow({
+        width: 1000,
+        height: 675,
+        resizable: true,
+        // frame: false,
+        titleBarStyle: "hidden",
+        show: false,
+        webPreferences: {
+            nodeIntegration: true
+        }
+    })
+
+    controlCenterWindow.loadFile('./app/controlCenterWindow/controlCenterWindow.html')
+
+    controlCenterWindow.on('ready-to-show', () => {
+        controlCenterWindow.show()
+    })
+
+    controlCenterWindow.on('close', () => {
+        controlCenterWindow = null
     })
 }
 

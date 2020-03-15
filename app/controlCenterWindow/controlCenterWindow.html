@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Control Center</title>
+    <link rel="stylesheet" href="./controlCenterWindow.css">
+    <style>
+        html,
+        body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        #titleBar {
+            -webkit-app-region: drag;
+            width: 100%;
+            height: 23px;
+            background-color: royalblue;
+            text-align: center;
+            line-height: 23px;
+            font-family: Arial, Helvetica, sans-serif;
+            color: white;
+        }
+        
+        #navigationBar {
+            /* background-color: yellowgreen; */
+            float: left;
+            height: calc(100% - 23px);
+            width: 50px;
+            overflow: hidden;
+        }
+        
+        #mainPanel {
+            width: calc(100% - 50px);
+            height: calc(100% - 23px);
+            float: left;
+            /* background-color: gray; */
+        }
+        
+        #naviList {
+            list-style-type: none;
+            width: inherit;
+            padding: 0;
+            margin: 0px auto;
+        }
+        
+        .naviItem {
+            display: block;
+            height: 50px;
+            line-height: 50px;
+            /* border-radius: 5px; */
+            background-color: salmon;
+            /* background-image: url(''); */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="titleBar"></div>
+    <div id="navigationBar">
+        <ul id="naviList">
+            <li class="naviItem"></li>
+        </ul>
+    </div>
+    <div id="mainPanel"></div>
+
+
+    <script src="./controlCenterWindow.js"></script>
+</body>
+
+</html>
