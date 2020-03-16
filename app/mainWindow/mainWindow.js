@@ -2,6 +2,12 @@ const $ = require('jquery')
 const { ipcRenderer } = require('electron')
 const fs = require('fs')
 
+// Load notifications:
+
+var notificationFile = JSON.parse(fs.readFileSync('./config/notifications.json'))
+
+var notificationList = notificationFile['notifications']
+
 // Clock functionality:
 
 const weekdays = {
@@ -29,6 +35,8 @@ function updateClock() {
     dateElement.innerHTML = month + date
     weekElement.innerHTML = weekdays[week]
     timeElement.innerHTML = checkTime(hour) + ':' + checkTime(minute) + ':' + checkTime(second)
+
+    checkNotifications()
 }
 
 setInterval(updateClock, 500)
@@ -38,6 +46,25 @@ function checkTime(num) {
         num = '0' + num
     }
     return num
+}
+
+function checkNotifications() {
+    for (let i = 0; i < notificationList.length; i++) {
+        const notiItem = notificationList[i];
+        var time = new Date(notiItem.time)
+            // console.log(new Date() - time)
+        if (-500 < time - new Date() && time - new Date() < 500) {
+            let notification = new Notification('下课提醒', {
+                body: '歪？老师吗？好像该下课了！'
+            })
+            console.log(time - new Date())
+            notificationList.splice(i, 1)
+            fs.writeFileSync('./config/notifications.json', JSON.stringify(notificationFile))
+            notificationFile = JSON.parse(fs.readFileSync('./config/notifications.json'))
+            notificationList = notificationFile['notifications']
+            console.log(notificationList.length)
+        }
+    }
 }
 
 
@@ -77,8 +104,20 @@ function createItem(index) {
 // notification functionality
 
 ipcRenderer.on('notification:new', (e, time) => {
-    console.log(time)
+    // console.log(time)
     let notification = new Notification('Notification Added Successfully', {
-        body: 'You will be notified on ' + time + '. '
+        body: 'You will be notified on ' + time.replace(/T/, ' ') + '. '
     })
+    var newNotiItem = {
+        time: time,
+        title: '',
+        message: '',
+        repeat: false
+    }
+    console.log(notificationList.length)
+    notificationList.push(newNotiItem)
+    fs.writeFileSync('./config/notifications.json', JSON.stringify(notificationFile))
+    notificationFile = JSON.parse(fs.readFileSync('./config/notifications.json'))
+    notificationList = notificationFile['notifications']
+    console.log(notificationList.length)
 })
