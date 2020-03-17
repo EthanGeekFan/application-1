@@ -1,10 +1,13 @@
 const $ = require('jquery')
 const { ipcRenderer } = require('electron')
 const fs = require('fs')
+const path = require('path')
+
+var confPath = path.join(__dirname, '../../config')
 
 // Load notifications:
 
-var notificationFile = JSON.parse(fs.readFileSync('./config/notifications.json'))
+var notificationFile = JSON.parse(fs.readFileSync(path.join(confPath, 'notifications.json')))
 
 var notificationList = notificationFile['notifications']
 
@@ -59,8 +62,8 @@ function checkNotifications() {
             })
             console.log(time - new Date())
             notificationList.splice(i, 1)
-            fs.writeFileSync('./config/notifications.json', JSON.stringify(notificationFile))
-            notificationFile = JSON.parse(fs.readFileSync('./config/notifications.json'))
+            fs.writeFileSync(path.join(confPath, 'notifications.json'), JSON.stringify(notificationFile))
+            notificationFile = JSON.parse(fs.readFileSync(path.join(confPath, 'notifications.json')))
             notificationList = notificationFile['notifications']
             console.log(notificationList.length)
         }
@@ -116,8 +119,8 @@ ipcRenderer.on('notification:new', (e, time) => {
     }
     console.log(notificationList.length)
     notificationList.push(newNotiItem)
-    fs.writeFileSync('./config/notifications.json', JSON.stringify(notificationFile))
-    notificationFile = JSON.parse(fs.readFileSync('./config/notifications.json'))
+    fs.writeFileSync(path.join(confPath, 'notifications.json'), JSON.stringify(notificationFile))
+    notificationFile = JSON.parse(fs.readFileSync(path.join(confPath, 'notifications.json')))
     notificationList = notificationFile['notifications']
     console.log(notificationList.length)
 })

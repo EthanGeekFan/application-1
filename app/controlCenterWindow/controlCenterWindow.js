@@ -1,4 +1,8 @@
 const $ = require('jquery')
+const fs = require('fs')
+const path = require('path')
+
+var confPath = path.join(__dirname, '../../config')
 
 var currentIndex = 0
 
@@ -45,16 +49,9 @@ function indexOf(collection, obj) {
     return -1
 }
 
-// var checkbox = document.getElementById('servivalMode')
-// checkbox.addEventListener('change', (e) => {
-//     console.log(e.target.checked)
-// })
-
-const fs = require('fs')
-
 // root path is: new/
 
-var configFile = JSON.parse(fs.readFileSync('./config/config.json'))
+var configFile = JSON.parse(fs.readFileSync(path.join(confPath, 'config.json')))
 
 var configurations = configFile['configurations']
 
@@ -147,7 +144,7 @@ function updateConfig(id, value) {
         const config = configurations[i];
         if (config['id'] === id) {
             config['value'] = value
-            fs.writeFileSync('./config/config.json', JSON.stringify(configFile))
+            fs.writeFileSync(path.join(confPath, 'config.json'), JSON.stringify(configFile))
             return true
         }
     }

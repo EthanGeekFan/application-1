@@ -27,7 +27,7 @@ function createWindow() {
     })
 
     // and load the index.html of the app.
-    mainWindow.loadFile('./app/mainWindow/mainWindow.html')
+    mainWindow.loadFile(path.join(__dirname, 'app/mainWindow/mainWindow.html'))
 
     // Open the DevTools.
     // mainWindow.webContents.openDevTools()
@@ -121,7 +121,7 @@ function newNotification() {
             }
         })
 
-        newNotificationWindow.loadFile('./app/newNotificationWindow/newNotificationWindow.html')
+        newNotificationWindow.loadFile(path.join(__dirname, 'app/newNotificationWindow/newNotificationWindow.html'))
 
         newNotificationWindow.on('ready-to-show', function() {
             newNotificationWindow.show()
@@ -150,7 +150,7 @@ function controlCenter() {
             }
         })
 
-        controlCenterWindow.loadFile('./app/controlCenterWindow/controlCenterWindow.html')
+        controlCenterWindow.loadFile(path.join(__dirname, 'app/controlCenterWindow/controlCenterWindow.html'))
 
         controlCenterWindow.on('ready-to-show', () => {
             controlCenterWindow.show()
