@@ -3,13 +3,26 @@ const { ipcRenderer } = require('electron')
 const fs = require('fs')
 const path = require('path')
 
-var confPath = path.join(__dirname, '../../config')
+var confPath = (require("electron").app || require('electron').remote.app).getPath('userData')
 
 // Load notifications:
 
-var notificationFile = JSON.parse(fs.readFileSync(path.join(confPath, 'notifications.json')))
+var notiFileExists = fs.existsSync(path.join(confPath, 'notifications.json'))
 
-var notificationList = notificationFile['notifications']
+var notificationFile
+var notificationList
+
+function readNotiFile() {
+    notiFileExists = fs.existsSync(path.join(confPath, 'notifications.json'))
+    if (notiFileExists) {
+        notificationFile = JSON.parse(fs.readFileSync(path.join(confPath, 'notifications.json')))
+    } else {
+        notificationFile = JSON.parse(fs.readFileSync(path.join(__dirname, '../../config/notifications.json')))
+    }
+    notificationList = notificationFile['notifications']
+}
+
+readNotiFile()
 
 // Clock functionality:
 
@@ -63,8 +76,7 @@ function checkNotifications() {
             console.log(time - new Date())
             notificationList.splice(i, 1)
             fs.writeFileSync(path.join(confPath, 'notifications.json'), JSON.stringify(notificationFile))
-            notificationFile = JSON.parse(fs.readFileSync(path.join(confPath, 'notifications.json')))
-            notificationList = notificationFile['notifications']
+            readNotiFile()
             console.log(notificationList.length)
         }
     }
@@ -120,7 +132,6 @@ ipcRenderer.on('notification:new', (e, time) => {
     console.log(notificationList.length)
     notificationList.push(newNotiItem)
     fs.writeFileSync(path.join(confPath, 'notifications.json'), JSON.stringify(notificationFile))
-    notificationFile = JSON.parse(fs.readFileSync(path.join(confPath, 'notifications.json')))
-    notificationList = notificationFile['notifications']
+    readNotiFile()
     console.log(notificationList.length)
 })

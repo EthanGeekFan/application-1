@@ -2,7 +2,10 @@ const $ = require('jquery')
 const fs = require('fs')
 const path = require('path')
 
-var confPath = path.join(__dirname, '../../config')
+// var confPath = path.join(__dirname, '../../config')
+
+var confPath = (require("electron").app || require('electron').remote.app).getPath('userData')
+    // console.log(configPath)
 
 var currentIndex = 0
 
@@ -49,9 +52,13 @@ function indexOf(collection, obj) {
     return -1
 }
 
-// root path is: new/
+var confFileExists = fs.existsSync(path.join(confPath, 'config.json'))
 
-var configFile = JSON.parse(fs.readFileSync(path.join(confPath, 'config.json')))
+if (confFileExists) {
+    var configFile = JSON.parse(fs.readFileSync(path.join(confPath, 'config.json')))
+} else {
+    var configFile = JSON.parse(fs.readFileSync(path.join(__dirname, '../../config/config.json')))
+}
 
 var configurations = configFile['configurations']
 

@@ -1,11 +1,13 @@
 {
-    "name": "Schedule",
-    "version": "1.0.0",
+    "name": "ClassAssistant",
+    "version": "1.0.1",
     "description": "A schedule application for classes and schools",
     "main": "main.js",
     "scripts": {
         "start": "electron .",
-        "dist": "electron-builder -m"
+        "dist-mac": "electron-builder -m",
+        "dist-windows": "electron-builder -w",
+        "dist-linux": "electron-builder -l"
     },
     "repository": "https://github.com/EthanGeekFan/application-1",
     "keywords": [
@@ -35,8 +37,6 @@
             "oneClick": false,
             "allowElevation": true,
             "allowToChangeInstallationDirectory": true,
-            "installerIcon": "./build/icons/aaa.ico",
-            "uninstallerIcon": "./build/icons/bbb.ico",
             "createDesktopShortcut": true,
             "createStartMenuShortcut": true,
             "shortcutName": "ClassAssistant"

@@ -36,10 +36,8 @@ function createWindow() {
         mainWindow.show()
     })
 
-    if (process.platform != 'win32') {
-        const mainMenu = Menu.buildFromTemplate(mainMenuTemplate)
-        Menu.setApplicationMenu(mainMenu)
-    }
+    const mainMenu = Menu.buildFromTemplate(mainMenuTemplate)
+    Menu.setApplicationMenu(mainMenu)
 
     mainWindow.on('closed', function() {
         app.quit()
@@ -142,7 +140,7 @@ function controlCenter() {
             width: 1000,
             height: 675,
             resizable: true,
-            // frame: false,
+            // frame: process.platform === 'darwin' ? true : false,
             titleBarStyle: "hidden",
             show: false,
             webPreferences: {
