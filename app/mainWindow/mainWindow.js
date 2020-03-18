@@ -91,7 +91,7 @@ var scheduleData
 function getSchedule() {
     // ipcRenderer.send('getSchedule')
     $.ajax({
-        url: 'https://www.room923.cf/app/api/getSchedule/?weekday=' + (new Date().getDay() + 1),
+        url: 'http://www.room923.cf/app/api/getSchedule/?weekday=' + (new Date().getDay() + 1),
         dataType: 'json',
         success: function(data) {
             scheduleData = data['data']['schedule']
