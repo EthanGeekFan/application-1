@@ -53,7 +53,7 @@ ipcMain.on('notification:new', (e, time) => {
 })
 
 const mainMenuTemplate = [{
-    label: 'Schedule',
+    label: 'Class Assistant',
     submenu: [{
         role: 'about',
     }, {
@@ -62,7 +62,10 @@ const mainMenuTemplate = [{
         type: 'separator'
     }, {
         label: 'Preferences',
-        accelerator: process.platform == 'darwin' ? 'Cmd+,' : 'Ctrl+,'
+        accelerator: process.platform == 'darwin' ? 'Cmd+,' : 'Ctrl+,',
+        click: (menuItem, browserWindow, event) => {
+            controlCenter()
+        }
     }, {
         type: 'separator'
     }, {
