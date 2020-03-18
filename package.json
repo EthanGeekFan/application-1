@@ -1,6 +1,6 @@
 {
     "name": "ClassAssistant",
-    "version": "1.0.1",
+    "version": "1.0.0",
     "description": "A schedule application for classes and schools",
     "main": "main.js",
     "scripts": {
@@ -25,6 +25,9 @@
     "dependencies": {
         "electron-store": "^5.1.1",
         "jquery": "^3.4.1"
+    },
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com/"
     },
     "build": {
         "productName": "ClassAssistant",
