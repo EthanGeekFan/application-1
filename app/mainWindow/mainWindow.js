@@ -5,6 +5,37 @@ const path = require('path')
 
 var confPath = (require("electron").app || require('electron').remote.app).getPath('userData')
 
+
+// configuration read and modify the appearance:
+
+var confFileExists = fs.existsSync(path.join(confPath, 'config.json'))
+
+if (confFileExists) {
+    var configFile = JSON.parse(fs.readFileSync(path.join(confPath, 'config.json')))
+} else {
+    var configFile = JSON.parse(fs.readFileSync(path.join(__dirname, '../../config/config.json')))
+}
+
+var configurations = configFile['configurations']
+
+if (configurations[findConfById('displayClock')]['value']) {
+    console.log(configurations[findConfById('displayClock')]['value'])
+} else {
+    console.log('2:')
+    console.log(configurations[findConfById('displayClock')]['value'])
+}
+
+function findConfById(id) {
+    for (let i = 0; i < configurations.length; i++) {
+        const confItem = configurations[i];
+        if (confItem['id'] == id) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+
 // Load notifications:
 
 var notiFileExists = fs.existsSync(path.join(confPath, 'notifications.json'))
